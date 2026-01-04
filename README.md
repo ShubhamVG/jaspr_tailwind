@@ -50,7 +50,7 @@ Or else, if you are using tailwindcss v3, then:
 ```css title="styles.tw.css"
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
 ```
 
 Finally, link the generated `styles.css` in your document, or otherwise add it to your website:
@@ -137,13 +137,43 @@ When using a custom config, you should explicitly set the `content` option to sc
 ```javascript
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./{lib,web}/**/*.dart'],
+  content: ["./{lib,web}/**/*.dart"],
   theme: {
     extend: {},
   },
   plugins: [],
+};
+```
+
+**\*Note**: Setting a custom content configuration is possible, but the tailwind integration won't recompile the css when those
+files change. Automatic recompiling is only enabled for `.dart` files.\*
+
+---
+
+## VS Code Setup: Tailwind CSS IntelliSense (Tailwind CSS 4)
+
+> **Note:** These instructions are specifically for Tailwind CSS 4. They have not been tested with older versions.
+
+To enable Tailwind CSS IntelliSense in VS Code when working with Jaspr/Dart:
+
+1. Install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension
+
+2. Add the following to your User Settings (Cmd+Shift+P → "Preferences: Open User Settings (JSON)"):
+
+```json
+{
+  "tailwindCSS.includeLanguages": {
+    "dart": "html"
+  },
+  "tailwindCSS. classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "classes"
+  ],
+  "tailwindCSS.experimental.classRegex": ["\\W\\s*classes:\\s*'(.*)'"]
 }
 ```
 
-***Note**: Setting a custom content configuration is possible, but the tailwind integration won't recompile the css when those
-files change. Automatic recompiling is only enabled for `.dart` files.*
+This configuration will enable IntelliSense autocomplete and suggestions for Tailwind CSS classes in your Dart/Jaspr files.
