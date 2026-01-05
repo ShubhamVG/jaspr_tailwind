@@ -165,7 +165,7 @@ To enable Tailwind CSS IntelliSense in VS Code when working with Jaspr/Dart:
   "tailwindCSS.includeLanguages": {
     "dart": "html"
   },
-  "tailwindCSS. classAttributes": [
+  "tailwindCSS.classAttributes": [
     "class",
     "className",
     "ngClass",
