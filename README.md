@@ -145,8 +145,7 @@ module.exports = {
 };
 ```
 
-**\*Note**: Setting a custom content configuration is possible, but the tailwind integration won't recompile the css when those
-files change. Automatic recompiling is only enabled for `.dart` files.\*
+> **Note:** Setting a custom content configuration is possible, but the tailwind integration won't recompile the css when those files change. Automatic recompiling is only enabled for `.dart` files.
 
 ---
 
