@@ -172,9 +172,12 @@ module.exports = {
 
 To enable Tailwind CSS IntelliSense in VS Code when working with Jaspr/Dart:
 
-1. Install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension.
+1. Install the
+[Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+extension.
 
-2. Add the following to your User Settings by opening command palette. (Ctrl+Shift+P → "Preferences: Open User Settings (JSON)"):
+2. Add the following to your User Settings by opening command palette.
+(Ctrl+Shift+P → "Preferences: Open User Settings (JSON)"):
 
 ```json
 {

@@ -1,7 +1,14 @@
+## 0.3.6
+
+- Transfer ownership
+- Add IntelliSense support in README.md
+
 ## 0.3.5
-- fix: package dependecy check failing for projects that are part of a dart workspace
+
+- fix: package dependency check failing for projects that are part of a dart workspace
 
 ## 0.3.4
+
 - Updated dependencies to support the latest version of Jaspr.
 
 ## 0.3.3
@@ -24,7 +31,8 @@
 ## 0.2.0
 
 - **BREAKING**: Changed tailwind command to use the [standalone cli](https://tailwindcss.com/blog/standalone-cli)
-  instead of npx. Make sure this is installed and included in your PATH. (See the updated README for setup instructions).
+instead of npx. Make sure this is installed and included in your PATH. (see
+the updated README for setup instructions).
 
 ## 0.1.1
 
