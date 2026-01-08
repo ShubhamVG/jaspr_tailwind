@@ -1,16 +1,19 @@
 # 🌬️ Tailwind integration for Jaspr
 
-[Tailwind](https://tailwindcss.com/) is a popular css framework to quickly compose beautiful websites without needing
-to write a lot of css.
+[Tailwind](https://tailwindcss.com/) is a popular CSS framework to quickly
+compose beautiful websites without needing to write a lot of CSS.
 
-This package is a first-class tailwind integration for [jaspr](https://github.com/schultek/jaspr).
+This package is a first-class tailwind integration for
+[Jaspr](https://github.com/schultek/jaspr).
 
 ## Prerequisites
 
-This package expects tailwind to be installed through the `tailwindcss` command. The recommended way is to use
-the [standalone tailwind cli](https://tailwindcss.com/blog/standalone-cli).
+This package expects tailwind to be installed through the `tailwindcss` command.
+The recommended way is to use the
+[standalone tailwind cli](https://tailwindcss.com/blog/standalone-cli).
 
-To install it, download the executable for your platform, preferably the [latest release](https://github.com/tailwindlabs/tailwindcss/releases/latest)
+To install it, download the executable for your platform, preferably the
+[latest release](https://github.com/tailwindlabs/tailwindcss/releases/latest)
 on GitHub and give it executable permissions:
 
 ```shell
@@ -50,10 +53,11 @@ Or else, if you are using tailwindcss v3, then:
 ```css title="styles.tw.css"
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
 ```
 
-Finally, link the generated `styles.css` in your document, or otherwise add it to your website:
+Finally, link the generated `styles.css` in your document, or otherwise add it
+to your website:
 
 In **static** or **server** mode:
 
@@ -76,7 +80,7 @@ void main() {
 }
 ```
 
-or in **client** mode:
+Or in **client** mode:
 
 ```html title="web/index.html"
 <html>
@@ -87,19 +91,22 @@ or in **client** mode:
 </html>
 ```
 
-You can also have more than one input css file. Any file inside the web directory ending in `.tw.css` will be used and compiled
-to its `.css` counterpart.
+You can also have more than one input CSS file. Any file inside the web
+directory ending in `.tw.css` will be used and compiled to its `.css`
+counterpart.
 
 ---
 
 ## Usage
 
-If you are unfamiliar with tailwind, head over to their [official documentation](https://tailwindcss.com/docs/utility-first)
-first (you can skip the installation part).
+If you are unfamiliar with tailwind, head over to its
+[official documentation](https://tailwindcss.com/docs/utility-first) first (you
+can skip the installation part).
 
-The `jaspr_tailwind` integration comes preconfigured, so you can use any tailwind classes inside your jaspr components.
+The `jaspr_tailwind` integration comes preconfigured, so you can use any
+tailwind classes inside your Jaspr components.
 
-A jaspr card component using tailwind would look like this:
+A Jaspr card component using tailwind would look like this:
 
 ```dart
 import 'package:jaspr/jaspr.dart';
@@ -111,14 +118,14 @@ class SimpleCard extends StatelessComponent {
   final String message;
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(classes: 'p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4', [
+  Component build(BuildContext context) {
+    return div(classes: 'p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4', [
       div(classes: 'shrink-0', [
         img(classes: 'h-12 w-12', src: '/img/logo.svg', alt: '$title Logo'),
       ]),
       div([
-        div(classes: 'text-xl font-medium text-black', [text(title)]),
-        p(classes: 'text-slate-500', [text(message)]),
+        div(classes: 'text-xl font-medium text-black', [.text(title)]),
+        p(classes: 'text-slate-500', [.text(message)]),
       ])
     ]);
   }
@@ -129,21 +136,68 @@ class SimpleCard extends StatelessComponent {
 
 ## Config
 
-By default, you don't need a tailwind config file for your project. The package automatically scans the project's Dart files and builds the CSS.
-However, if you want to customize the default config like the theme or colors, you can add a `tailwind.config.js` file to the root directory of your project.
+By default, you don't need a tailwind config file for your project. The package
+automatically scans the project's Dart files and builds the CSS. However, if
+you want to customize the default config like the theme or colors, you can add
+a `tailwind.config.js` file to the root directory of your project.
 
-When using a custom config, you should explicitly set the `content` option to scan Tailwind class names from the Dart file:
+> [!NOTE]
+> Starting from v4, tailwind uses
+> [CSS first configuration](https://tailwindcss.com/blog/tailwindcss-v4#css-first-configuration).
+> Prefer using that for themes and
+> [variables](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables).
+
+When using a custom config, you should explicitly set the `content` option to
+scan Tailwind class names from the Dart file:
 
 ```javascript
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./{lib,web}/**/*.dart'],
+  content: ["./{lib,web}/**/*.dart"],
   theme: {
     extend: {},
   },
   plugins: [],
+};
+```
+
+> [!NOTE]
+> Setting a custom content configuration is possible, but the
+> tailwind integration won't recompile the CSS when those files change.
+> Automatic recompiling is only enabled for `.dart` files.
+
+---
+
+## VS Code Setup: Tailwind CSS IntelliSense
+
+To enable Tailwind CSS IntelliSense in VS Code when working with Jaspr/Dart:
+
+1. Install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension.
+
+2. Add the following to your User Settings by opening command palette. (Ctrl+Shift+P → "Preferences: Open User Settings (JSON)"):
+
+```json
+{
+  "tailwindCSS.includeLanguages": {
+    "dart": "html"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "classes"
+  ],
+  "tailwindCSS.experimental.classRegex": ["\\W\\s*classes:\\s*'(.*)'"]
 }
 ```
 
-***Note**: Setting a custom content configuration is possible, but the tailwind integration won't recompile the css when those
-files change. Automatic recompiling is only enabled for `.dart` files.*
+1. Optionally, reload the extension.
+
+This configuration will enable IntelliSense autocomplete and suggestions for
+Tailwind CSS classes in your Dart/Jaspr files.
+
+> [!NOTE]
+> If you are using tailwindcss v3, then a [config](#config) file is a must
+otherwise the tailwind IntelliSense plugin won't be able to pick up which
+version of tailwind is being used. Also highly suggested to move to v4.
