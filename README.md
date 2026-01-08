@@ -192,7 +192,7 @@ To enable Tailwind CSS IntelliSense in VS Code when working with Jaspr/Dart:
 }
 ```
 
-1. Optionally, reload the extension.
+Optionally, reload the extension.
 
 This configuration will enable IntelliSense autocomplete and suggestions for
 Tailwind CSS classes in your Dart/Jaspr files.
